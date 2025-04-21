@@ -11,10 +11,8 @@ str) -> str:
     raw_data = base64.b64decode(encoded)
 
     # New folder path based on template_id
-    base_path = 
-"/home/cleverce/content-management-files.clevercertificates.com/items"
-    template_path = os.path.join(base_path, template_id, "media", 
-"images")
+    base_path = "/home/cleverce/content-management-files.clevercertificates.com/items"
+    template_path = os.path.join(base_path, template_id, "media","images")
     os.makedirs(template_path, exist_ok=True)
 
     filename = f"{filename}.{extension}"
@@ -24,6 +22,5 @@ str) -> str:
         f.write(raw_data)
 
     # Return the public URL path
-    return 
-f"https://content-management-files.clevercertificates.com/items/{template_id}/media/images/{filename}"
+    return "https://content-management-files.clevercertificates.com/items/{template_id}/media/images/{filename}"
 

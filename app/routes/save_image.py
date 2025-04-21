@@ -20,3 +20,5 @@ data.image_base64)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+__all__ = ["router"]
+
