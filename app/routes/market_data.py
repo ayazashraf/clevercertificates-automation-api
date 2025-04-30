@@ -249,10 +249,6 @@ ________________________________________
         generated["summary"]
     ))
 
-    from fastapi import APIRouter
-from app.db.database import get_db_connection
-
-router = APIRouter()
 
 @router.get("/get-next-template-to-process")
 def get_next_template():
