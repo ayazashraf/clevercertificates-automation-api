@@ -25,10 +25,10 @@ async def generate_market_data(template: dict):
         "paragraph": f"Write one compelling Etsy product description (50-60 words) an editable and printable certificate template titled '{title}'. Provide only one paragraph without extra suggestions.",
         "tags": f"Generate exactly 13 Optimized Etsy SEO tags for an editable and printable certificate template titled '{title}'(each maximum 20 characters, comma-separated). Return only tags separated by commas.",
         "materials": f"Generate exactly 13 material for digital template titled '{title}' (each maximum 20 characters, comma-separated) . Return only keywords, no explanation.",
-        "alt_primary": f"Write one SEO-friendly Alt text (300–450 characters) an editable and printable certificate template titled '{title}'. Mention design details, style, and usage purpose naturally.",
-        "alt_secondary": f"Create one Etsy-optimized Alt text (300–450 characters) an editable and printable certificate template titled '{title}'. Focus on audience (buyers) and best use case.",
-        "alt_third": f"Suggest one SEO-optimized Alt text (300–450 characters) for an editable certificate titled '{title}'. Focus on important keywords and product appeal.",
-        "alt_fourth": f"Create one professional Alt text (300–450 characters) for an editable and printable certificate titled '{title}'. Focus on describing style, usability, and ideal customer."
+        "alt_primary": f"Write one SEO-friendly Alt text (300–450 characters) an editable and printable certificate template titled '{title}'. Mention design details, style, and usage purpose naturally. Provide only one paragraph without extra suggestions.",
+        "alt_secondary": f"Create one Etsy-optimized Alt text (300–450 characters) an editable and printable certificate template titled '{title}'. Focus on audience (buyers) and best use case.  Provide only one paragraph without extra suggestions.",
+        "alt_third": f"Suggest one SEO-optimized Alt text (300–450 characters) for an editable certificate titled '{title}'. Focus on important digital template.  Provide only one paragraph without extra suggestions.",
+        "alt_fourth": f"Create one professional Alt text (300–450 characters) for an editable and printable certificate titled '{title}'. Focus on describing style, usability, and ideal customer.  Provide only one paragraph without extra suggestions."
     }
 
     # Call Gemini for each prompt
