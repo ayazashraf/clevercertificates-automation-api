@@ -45,5 +45,13 @@ async def save_image_on_table(template_id: int, filename: str = "preview-on-tabl
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
+@router.post("/save-thumbnail")
+async def save_thumbnail(template_id: int, filename: str = "thumbnail", image_base64: str = Form(...)):
+    try:
+        saved_path = save_image_file(template_id, filename, image_base64)
+        return JSONResponse(content={"message": "Thumbnail image saved", "path": saved_path})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
 __all__ = ["router"]
 
