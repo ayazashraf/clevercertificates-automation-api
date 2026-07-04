@@ -10,7 +10,7 @@ async def get_template_details(template_id: int):
         conn = get_db_connection()
         with conn.cursor() as cursor:
             cursor.execute("""
-                SELECT t.*, cs.width, cs.height
+                SELECT t.*, cs.width, cs.height, t.canvas_size_id
                 FROM templates t
                 JOIN canvas_size cs ON t.canvas_size_id = cs.id
                 WHERE t.id = %s AND t.is_deleted = 0
