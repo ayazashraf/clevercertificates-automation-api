@@ -52,9 +52,9 @@ def get_template_batch():
 
         # Step 3: Define variant IDs (hardcoded logic for now)
         variants = [
-            {"id": 1553, "endpoint": "/save-image-with-frame", "filename": "preview-with-frame"},
-            {"id": 1552, "endpoint": "/save-image-zoomed", "filename": "preview-zoomed"},
-            {"id": 1551, "endpoint": "/save-image-on-table", "filename": "preview-on-table"}
+            {"id": 1553, "endpoint": "/save-image-with-frame", "filename": "preview-with-frame-wm"},
+            {"id": 1552, "endpoint": "/save-image-zoomed", "filename": "preview-zoomed-wm"},
+            {"id": 1551, "endpoint": "/save-image-on-table", "filename": "preview-on-table-wm"}
         ]
 
         return BatchResponse(initial_template_id=template_id, variants=variants)
