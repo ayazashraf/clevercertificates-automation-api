@@ -28,7 +28,7 @@ def get_template_batch():
             cursor.execute("""
                 SELECT template_id FROM template_processing_queue
                 WHERE status = 'pending' AND template_id IN (
-                SELECT id FROM templates WHERE live = 1 AND is_deleted = 0 and canvas_size_id != 2
+                SELECT id FROM templates WHERE live = 1 AND is_deleted = 0
                 )
                 ORDER BY id ASC
                 LIMIT 5
