@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-from app.routes import get_template, log_template, save_image, save_pdf, template_batch, market_data
+from app.routes import get_template, log_template, save_image, save_etsy_image, save_pdf, template_batch, market_data
 
 origins = [
     "http://localhost:3000",  # local dev frontend
@@ -28,11 +28,13 @@ async def ping():
 app.include_router(get_template.router)
 app.include_router(log_template.router)
 app.include_router(save_image.router)
+app.include_router(save_etsy_image.router)
 app.include_router(save_pdf.router)
 app.include_router(template_batch.router)
 app.include_router(market_data.router)
 
 print("✔ save_image router registered")
+print("✔ save_etsy_image router registered")
 
 @app.on_event("startup")
 async def log_routes():
