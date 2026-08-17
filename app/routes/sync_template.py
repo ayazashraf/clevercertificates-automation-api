@@ -90,18 +90,28 @@ def sync_template(payload: TemplateSyncPayload):
             templates_affected = cursor.rowcount
 
             # ── 3. Reset processing queue to pending ──────────────────────────
-            # INSERT if the row is missing, UPDATE status if it already exists.
+            # UPDATE the existing row (any status: completed, processing, etc.)
+            # so we never create duplicates.  If no row exists yet, INSERT one.
             cursor.execute(
                 """
-                INSERT INTO template_processing_queue (template_id, status, last_attempt_at, message)
-                VALUES (%s, 'pending', %s, NULL)
-                ON DUPLICATE KEY UPDATE
-                    status           = 'pending',
-                    last_attempt_at  = %s,
-                    message          = NULL
+                UPDATE template_processing_queue
+                SET    status          = 'pending',
+                       last_attempt_at = %s,
+                       message         = NULL
+                WHERE  template_id = %s
                 """,
-                (payload.id, now, now),
+                (now, payload.id),
             )
+
+            if cursor.rowcount == 0:
+                # No existing queue row for this template — insert fresh.
+                cursor.execute(
+                    """
+                    INSERT INTO template_processing_queue (template_id, status, last_attempt_at, message)
+                    VALUES (%s, 'pending', %s, NULL)
+                    """,
+                    (payload.id, now),
+                )
 
         conn.commit()
 
