@@ -1,2 +1,16 @@
 RewriteEngine On
+
+# ── CORS: allow the generator and local dev ─────────────────────────────────
+# Handle preflight OPTIONS requests immediately — return 200 without hitting FastAPI.
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^ - [R=200,L]
+
+Header always set Access-Control-Allow-Origin "https://generator.clevercertificates.com"
+Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type, Authorization, Accept"
+Header always set Access-Control-Allow-Credentials "true"
+# ────────────────────────────────────────────────────────────────────────────
+
+# Proxy everything else to the FastAPI process on port 8000
+RewriteCond %{REQUEST_METHOD} !OPTIONS
 RewriteRule ^(.*)$ http://127.0.0.1:8000/$1 [P,L]
