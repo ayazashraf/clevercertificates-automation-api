@@ -23,15 +23,18 @@ def get_template_batch():
         # Use shared app DB connection
         conn = get_db_connection()        
 
-        # Step 1: Get first pending template
+        # Step 1: Get first pending template.
+        # The live=1 subquery was previously filtering against cleverce_automation_hub.templates,
+        # which doesn't include templates that haven't been through the admin sync flow.
+        # The queue is explicitly managed (only intentional template IDs are inserted),
+        # so filtering here is unnecessary — get_template_details enforces is_deleted=0
+        # and will return 404 for any template that doesn't exist or is deleted.
         with conn.cursor() as cursor:
             cursor.execute("""
                 SELECT template_id FROM template_processing_queue
-                WHERE status = 'pending' AND template_id IN (
-                SELECT id FROM templates WHERE live = 1 AND is_deleted = 0
-                )
+                WHERE status = 'pending'
                 ORDER BY id ASC
-                LIMIT 5
+                LIMIT 1
             """)
             row = cursor.fetchone()
          
